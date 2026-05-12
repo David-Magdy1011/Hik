@@ -2,13 +2,14 @@
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 />
 <link rel="stylesheet" href="style.css" />
   <title>Welcome</title>
-<script src="script.js"></script>
+
 </head>
 <body>
+  <script src="script.js"></script>
    <!-- HEADER-->
 <div class="header oswald-class">
 
@@ -50,6 +51,7 @@
   id="searchInput"
   placeholder="Search..."
 />
+
   <button onclick="searchPage()">
   SEARCH
 </button>
@@ -57,21 +59,19 @@
 <!--Products-->
 
  <!-- sections -->
+  
 <div id="Product">
+
   <h1 class="products-title">Products</h1>
-  <div class="product-container">
-    <div class="card">
-    <img src="images/colorvu-image..png" alt="creativity icon">
-      </div>
-    <div class="card">
-    <img src="images/HIKVISION PTZ .png" alt="creativity icon">
-    </div>
+
+
+  <div class="product-container" id="products"></div>
+
+  <div class="slider-buttons">
+    <button onclick="prevSlide()">‹</button>
+    <button onclick="nextSlide()">›</button>
   </div>
-  <div class="item">
-
 </div>
-</div>
-
 
 <div id="Contact">
   <h1>Contact</h1>
