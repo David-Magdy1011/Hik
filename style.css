@@ -507,38 +507,29 @@ body {
     width: 40px;
     height: 40px;
     font-size: 18px;
-
  }
- 
+
 .products-title {
     font-size: 35px;
   }
-
   @media (max-width: 768px) {
-
-  @media (max-width: 768px) {
-
   .product-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-
     width: 80%;
     gap: 50px;
     padding: 10px;
     box-sizing: border-box;
   }
-
   .card {
     width: 100%;
     max-width: unset;
     min-width: 0;
   }
-
   .card img {
     height: 140px;
   }
- 
 }
 /* زرار المنيو */
 .menu-icon {
@@ -546,18 +537,14 @@ body {
   font-size: 35px;
   cursor: pointer;
 }
-
 /* موبايل */
 @media (max-width: 768px) {
-
   .menu-icon {
     display: block;
   }
-
   .header {
     flex-wrap: wrap;
   }
-
   .header-links {
     display: none;
     flex-direction: column;
@@ -566,12 +553,9 @@ body {
     background: white;
     margin-top: 10px;
   }
-
   .header-links.active {
     display: flex;
   }
-
-
   @media (max-width: 768px) {
 
   .header {
@@ -579,20 +563,16 @@ body {
     justify-content: space-between;
     align-items: center;
   }
-
-
   .logo {
     width: 120px;
   }
 
   }
+
 }
   }
-  @media (max-width: 768px) {
 
-  
-}
-}
+
 
 
 
