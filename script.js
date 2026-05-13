@@ -101,3 +101,24 @@ document.getElementById("searchInput").addEventListener("keydown", function (e) 
     searchPage();
   }
 });
+function toggleMenu() {
+
+  let menu = document.querySelector(".header-links");
+
+  menu.classList.toggle("active");
+
+}
+
+/* قفل المنيو بعد الضغط على أي لينك */
+
+document.querySelectorAll(".header-links a").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    document
+      .querySelector(".header-links")
+      .classList.remove("active");
+
+  });
+
+});

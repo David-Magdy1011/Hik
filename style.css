@@ -79,12 +79,6 @@ body {
   flex-wrap: wrap;
   min-height: 80vh;
 }
-@media (max-width: 768px) {
-  .Landing-Page {
-    flex-direction: column;
-    text-align: center;
-  }
-}
 .text {
     text-align: center;
   max-width: 80%;
@@ -131,25 +125,21 @@ body {
   margin: 30px 0;
  }
  .card {
-  width: 220px;
+  width: 100%;
+  max-width: 220px;
   background: white;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-align: center;
   transition: 0.4s;
-}
-
-.Products-Cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
   margin: auto;
-  padding: 20px;
-  justify-content: center;
-
 }
+
+
+
+
+
  .item{
     text-align: center;
     padding: 15px;
@@ -202,34 +192,6 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 15px;
-  }
-  .Landing-Page {
-    padding: 20px;
-  }
-  .text {
-    max-width: 100%;
-  }
-  .Landing-Page-search input {
-    width: 80%;
-    margin-left: 0;
-  }
-  .Landing-Page-search input:focus {
-  outline: none;
-  border-color: red;
-}
-  .Products-Cards {
-    grid-template-columns: 1fr;
-  }
-  .item {
-    width: 100%;
-  }
-}
-
 .products-title {
   text-align: center;
   font-size: 60px;
@@ -266,15 +228,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-.product-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 25px;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 30px auto;
-}
+
 /* العنوان خارج البوكس */
 .hero-title{
   text-align: center;
@@ -310,18 +264,6 @@ body {
   width: 350px;   /* 👈 صغر الصورة */
   max-width: 100%;
   border-radius: 15px;
-}
-
-/* موبايل */
-@media (max-width: 768px){
-  .hero-box{
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-image img{
-    width: 250px;
-  }
 }
 .contact-container {
   display: flex;
@@ -477,4 +419,167 @@ body {
 
   transition: 0.3s;
 }
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 30px auto;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+
+  /* ===== HEADER ===== */
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .header-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  /* ===== LANDING ===== */
+  .Landing-Page {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  /* ===== SEARCH ===== */
+  .Landing-Page-search {
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+  }
+
+  .Landing-Page-search input {
+    width: 50%;
+    margin-left: 0;
+  }
+
+  .Landing-Page-search button {
+    width: 60%;
+  }
+
+  /* ===== PRODUCTS GRID ===== */
+  .Products-Cards {
+    grid-template-columns: 1fr !important;
+    
+  }
+
+  .card {
+    width: 100% !important;
+    max-width: 320px;
+    margin: auto;
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image img {
+    width: 220px;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .connect-page input,
+  .connect-page textarea {
+    width: 90%;
+  }
+
+  /* ===== SLIDER ===== */
+  .slider-buttons button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+
+ }
+ 
+.products-title {
+    font-size: 35px;
+  }
+
+  @media (max-width: 768px) {
+
+  @media (max-width: 768px) {
+
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    width: 80%;
+    gap: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .card {
+    width: 100%;
+    max-width: unset;
+    min-width: 0;
+  }
+
+  .card img {
+    height: 140px;
+  }
+ 
+}
+/* زرار المنيو */
+.menu-icon {
+  display: none;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* موبايل */
+@media (max-width: 768px) {
+
+  .menu-icon {
+    display: block;
+  }
+
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .header-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background: white;
+    margin-top: 10px;
+  }
+
+  .header-links.active {
+    display: flex;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .logo {
+    width: 140px;
+  }
+  }
+  }
+}
+
+
 
