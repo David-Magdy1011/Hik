@@ -34,20 +34,52 @@ function renderProducts(list) {
   });
 }
 function searchPage() {
-  let input = document.getElementById("searchInput").value.toLowerCase().trim();
 
-  // لو البحث فاضي → رجّع كل المنتجات
+  let input = document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase()
+    .trim();
+
+  let results = document.getElementById("searchResults");
+
+  let products = [
+  { name: "ColorVu Camera", image: "images/colorvu-image.png" },
+  { name: "PTZ Camera", image: "images/HIKVISIONPTZ.png" },
+  { name: "Dome Camera", image: "images/dome.jpg" },
+  { name:"DVR", image: "images/Hikvision-iDS-7104HQHI-M1T-4ch-1080P-Mini-1U-H.265-AcuSense-DVR.jpg" },
+  { name: "RG59 Coaxial Video Cable", image: "images/61CzUpXiByL._SX522_.jpg" },
+  { name: "Power Supply", image: "images/615HryCWkL._AC_UF8941000_QL80_-1.jpg" },
+  { name: "DC Power Pigtail Male/Female ", image: "images/71Gf-6ZqZdL._AC_SX522_.jpg" },
+  { name: "BNC Cable for Camera - Video Transmission", image: "images/4122d9Wgi3L._AC_SX679_.jpg" },
+  { name: "Topiky Microphone for CCTV Camera", image: "images/51XGoqZHruL._AC_SX522_.jpg" },
+  { name: "WD 1 TB Hard Disk Internal 3.5", image: "images/71MiDZhqfaL._AC_SX679_.jpg" },
+
+  ];
+
+  results.innerHTML = "";
+
   if (input === "") {
-    filteredProducts = [...products];
-  } else {
-    filteredProducts = products.filter(p =>
-      p.name.toLowerCase().includes(input)
-    );
+    return;
   }
 
-  currentIndex = 0;
-  renderProducts(filteredProducts);
-  updateSlider();
+  let filtered = products.filter(product =>
+    product.name.toLowerCase().includes(input)
+  );
+
+  filtered.forEach(product => {
+
+    results.innerHTML += `
+      <div class="search-card">
+        <img src="${product.image}">
+        <h3>${product.name}</h3>
+      </div>
+    `;
+  });
+
+  if (filtered.length === 0) {
+    results.innerHTML = "<p>No results found</p>";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {

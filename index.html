@@ -5,30 +5,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
   <title>Welcome</title>
+  
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   
    <!-- HEADER-->
 <div class="header oswald-class">
 
   <div class="header-left">
-    <img class="logo" src="images/Hikvision-Logo.wine.png">
-  </div>
-<div class="menu-icon" onclick="toggleMenu()">
+      <div class="menu-icon" onclick="toggleMenu()">
   ☰
 </div>
+    <img class="logo" src="images/Hikvision-Logo.wine.png">
+  </div>
   <div class="header-links">
     <a href="index.html">Home</a>
-    <a href="#Product">Product</a>
-    <a href="#Contact">Contact</a>
+    <a href="products.html">Product</a>
+    <a href="contact.html">Contact</a>
   </div>
 
 </div>
-  
-  
 <!--Landing-Page-->
-
   <div id="HOME">
 <div class="hero-title">
   <h2>Welcome To Hikvision</h2>
@@ -51,67 +50,15 @@
   type="text"
   id="searchInput"
   placeholder="Search..."
+  onkeyup="searchPage()"
+  
 />
-
   <button onclick="searchPage()">
   SEARCH
 </button>
 </div>
-<!--Products-->
-
- <!-- sections -->
-  
-<div id="Product">
-
-  <h1 class="products-title">Products</h1>
-
-
-  <div class="product-container" id="products"></div>
-
-  <div class="slider-buttons">
-    <button onclick="prevSlide()">‹</button>
-    <button onclick="nextSlide()">›</button>
-  </div>
-</div>
-
-<div id="Contact">
-  <h1>Contact</h1>
-
-  <div class="contact-wrapper">
-
-    <!-- الكروت -->
-    <div class="contact-container">
-
-      <div class="contact-card">
-        <img src="images/free-location-icon-2955-thumb.png">
-        <h3>Hasnen Dosoky ST. - ElMaadi – Cairo</h3>
-      </div>
-
-      <div class="contact-card">
-        <img src="images/tl.webp">
-        <h3>abosefyn56@gmail.com</h3>
-      </div>
-
-      <div class="contact-card">
-        <img src="images/Phone_icon.png">
-        <h3>01285465805</h3>
-      </div>
-
-    </div>
-
-    <!-- الفورم -->
-    <div class="connect-page">
-      <input placeholder="Your Name..." />
-      <input placeholder="Your Email..." />
-      <input placeholder="Phone Number..." />
-      <input placeholder="Bussines Name..." />
-      <input placeholder="Category..." />
-      <textarea placeholder="Your message"></textarea>
-      <button>Send Message</button>
-    </div>
-
-  </div>
-</div>
+<div id="searchResults" class="search-results"></div>
+<div id="contact" class="contact-container"></div>
 
  <!--Footer-->
   <footer class="footer">
@@ -121,10 +68,14 @@
     </div>
     <div class="footer-links">
       <a href="index.html">About</a>
-      <a href="#Product">Product</a>
-      <a href="#Contact">Contact</a>
+      <a href="products.html">Product</a>
+      <a href="contact.html">Contact</a>
     </div>
     <p class="copy">© 2026 All Rights Reserved</p>
   </footer>
 <script src="script.js"></script>
+<div class="slider-buttons"></div>
+
+<div class="product-container"></div>
+
 </body>

@@ -135,12 +135,37 @@ body {
   transition: 0.4s;
   margin: auto;
 }
+.search-results {
+  width: 90%;
+  max-width: 900px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
+.search-card {
+  width: 220px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  padding-bottom: 15px;
+  transition: 0.4s;
+}
 
+.search-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-
-
- .item{
+.search-card:hover {
+  transform: scale(1.05);
+}
+.item{
     text-align: center;
     padding: 15px;
     border-radius: 12px;
@@ -268,18 +293,23 @@ body {
 .contact-container {
   display: flex;
   flex-direction: column;
+
   gap: 20px;
-  flex-wrap: wrap;
-  align-items: flex-start; 
-  margin-top: 60px;
 }
-.contact-wrapper{
+.contact-wrapper {
   display: flex;
+
   justify-content: center;
   align-items: flex-start;
-  gap: 80px;
+
+  gap: 60px;
+
+  max-width: 1200px;
+
+  margin: 40px auto;
+  padding: 20px;
+
   flex-wrap: wrap;
-  padding: 40px;
 }
 .contact-card {
   display: flex;
@@ -300,20 +330,24 @@ body {
   margin: 0;
   color: white;
 }
-.connect-page input {
-  padding: 15px;
-  width: 300px;
-  border-radius: 50px;
-  border: 1px solid #ccc;
-  display: block;
-  margin: 0;
+.connect-page {
+  display: flex;
+  flex-direction: column;
+min-width: 320px;
+  gap: 15px;
 }
 .connect-page textarea {
-  width: 280px;
+  width: 100%;
+  max-width: 350px;
+
   height: 130px;
+
   padding: 15px;
+
   border-radius: 20px;
   border: 1px solid #ccc;
+
+  box-sizing: border-box;
 }
 .connect-page button {
   padding: 10px 50px;
@@ -328,6 +362,25 @@ body {
 }
 .connect-page button:hover {
   background-color: skyblue;
+}
+.connect-page input {
+  width: 100%;
+  max-width: 350px;
+
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+
+  display: block;
+  box-sizing: border-box;
+}
+.connect-page {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  min-width: 320px;
 }
 #Contact h1{
   text-align: center;
@@ -344,7 +397,6 @@ body {
   max-width: 700px;
   margin: 30px auto;
 }
-
 .slider img {
   width: 100%;
   height: 350px;
@@ -358,23 +410,15 @@ body {
   transition: 0.4s;
   border-radius: 15px;
 }
-
 .active {
-  transform: translateY(10px);
+  transform: scale(1.1);
+  border: 3px solid red;
+  box-shadow: 0 0 20px rgba(255,0,0,0.4);
 }
-
 .active img {
   transform: scale(1.1);
   transition: 0.4s;
   border-bottom: 5px solid red;
-}
-.slider-buttons {
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin: 30px 0;
 }
 
 .slider-buttons button {
@@ -388,7 +432,6 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .slider-buttons button:hover {
   background: red;
 }
@@ -512,7 +555,6 @@ body {
 .products-title {
     font-size: 35px;
   }
-  @media (max-width: 768px) {
   .product-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -529,22 +571,27 @@ body {
   }
   .card img {
     height: 115px;
-  }
-}
-/* زرار المنيو */
-.menu-icon {
+   }
+   }
+ .menu-icon {
   display: none;
   font-size: 35px;
   cursor: pointer;
 }
-/* موبايل */
+
 @media (max-width: 768px) {
+
   .menu-icon {
     display: block;
   }
+
   .header {
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
+
   .header-links {
     display: none;
     flex-direction: column;
@@ -553,27 +600,13 @@ body {
     background: white;
     margin-top: 10px;
   }
+
   .header-links.active {
     display: flex;
   }
-  @media (max-width: 768px) {
 
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
   .logo {
     width: 120px;
   }
 
-  }
-
 }
-  }
-
-
-
-
-
-
