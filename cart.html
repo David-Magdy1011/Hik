@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Hik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+    <style>
+        body { 
+            
+            
+            font-family: "Oswald", sans-serif; 
+            padding: 40px; 
+            background-color: #f5f5f5; 
+            color: #333;
+            margin: 0;
+        }
+        .cart-container { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            border-bottom: 3px solid red;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #ddd; 
+            padding: 15px 0; 
+        }
+        .cart-item img { 
+            width: 90px; 
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        .item-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .item-details h3 {
+            margin: 0 0 5px 0;
+            color: #111;
+        }
+        .item-details p {
+            margin: 0;
+            color: #666;
+        }
+        .item-price {
+            font-weight: bold;
+            color: red;
+            font-size: 1.2rem;
+        }
+        .total-price { 
+            text-align: right; 
+            font-size: 1.6rem; 
+            margin-top: 30px; 
+            font-weight: bold;
+            color: black; 
+        }
+        .total-price span {
+            color: red;
+        }
+        .cart-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .clear-btn { 
+            background-color: black; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            cursor: pointer; 
+            border-radius: 20px; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .clear-btn:hover { 
+            background-color: red; 
+        }
+        .back-btn { 
+            background-color: white; 
+            color: black; 
+            border: 2px solid black;
+            padding: 12px 25px; 
+            text-decoration: none; 
+            border-radius: 20px; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background-color: black;
+            color: white;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .empty-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin: 40px 0;
+        }
+        
+    </style>
+</head>
+<body>
+
+ <div class="header oswald-class">
+    <div class="header-left">
+      <div class="menu-icon" onclick="toggleMenu()">
+        ☰
+      </div>
+      <img class="logo" src="images/Hikvision-Logo.wine.png" alt="Logo">
+    </div>
+    
+    <div class="header-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Product</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="cart-nav-link">
+        🛒 Cart (<span id="cart-count">0</span>)
+      </a>
+    </div>
+  </div>
+<div class="cart-container">
+    <h1>Shopping Cart 🛒</h1>
+    
+    <div id="cart-items-list">
+        </div>
+
+    <div class="total-price">
+        Total Price: <span id="cart-total-price">0</span> EGP
+    </div>
+
+    <div class="cart-buttons">
+        <a href="index.html" class="back-btn">⬅ Continue Shopping</a>
+        <button class="clear-btn" onclick="clearCart()">Clear Cart 🗑️</button>
+    </div>
+</div>
+
+<script>
+    // كود الجافا سكريبت الخاص بقراءة المنتجات وعرضها داخل صفحة الكارت
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCartPage() {
+        const listContainer = document.getElementById("cart-items-list");
+        const totalContainer = document.getElementById("cart-total-price");
+        
+        if (!listContainer || !totalContainer) return;
+        listContainer.innerHTML = "";
+        
+        // إذا كانت السلة فارغة
+        if (cart.length === 0) {
+            listContainer.innerHTML = "<p class='empty-message'>Your cart is currently empty.</p>";
+            totalContainer.innerText = "0";
+            return;
+        }
+
+        let totalPrice = 0;
+
+        // تكرار عرض المنتجات المضافة
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+
+            listContainer.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ${item.price} EGP | Quantity: ${item.quantity}</p>
+                    </div>
+                    <div>
+                        <div class="item-price">${itemTotal} EGP</div>
+                        <button class="delete-btn" onclick="removeFromCart(${index})">Remove ❌</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        totalContainer.innerText = totalPrice;
+    }
+
+    // دالة حذف منتج واحد من السلة
+    function removeFromCart(index) {
+        cart.splice(index, 1); // حذف العنصر من المصفوفة
+        localStorage.setItem("cart", JSON.stringify(cart)); // حفظ التعديل
+        renderCartPage(); // إعادة عرض الصفحة لتحديث البيانات
+    }
+
+    // دالة تفريغ السلة بالكامل
+    function clearCart() {
+        if (confirm("Are you sure you want to clear your cart?")) {
+            cart = [];
+            localStorage.removeItem("cart");
+            renderCartPage();
+        }
+    }
+
+    // تشغيل الدالة فور تحميل الصفحة
+    window.onload = renderCartPage;
+</script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Hikvision</h3>
+      <p>Security Systems</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">About</a>
+      <a href="products.html">Product</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="cart-nav-link">
+        🛒 Cart (<span id="cart-count">0</span>)
+      </a>
+    </div>
+    <p class="copy">© 2026 All Rights Reserved</p>
+  </footer>
+</body>
+</html>

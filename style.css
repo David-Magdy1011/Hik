@@ -16,6 +16,8 @@ body {
   padding: 0 40px;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   box-sizing: border-box;
   z-index: 9999;
@@ -37,7 +39,7 @@ body {
   border-radius: 15px;
   display: inline-block;
   position: relative;
-  transition:0.3s ;
+  transition: 0.3s ;
 }
 .header-links a:hover {
   color: red;
@@ -66,11 +68,18 @@ body {
   padding: 5px 15px;
   color: rgb(218, 218, 243);
   border: none;
-  }
-  .header-links button:hover{
-   background-color: red;
-   cursor: pointer;
-  }
+}
+.header-links button:hover{
+  background-color: red;
+  cursor: pointer;
+}
+
+/* 🛒 تنسيق مخصص للينك الكارت في الهيدر */
+.cart-nav-link {
+  color: #f73636 !important;
+  font-weight: bold;
+}
+
 .Landing-Page {
   display: flex;
   justify-content: space-between;
@@ -80,7 +89,7 @@ body {
   min-height: 80vh;
 }
 .text {
-    text-align: center;
+  text-align: center;
   max-width: 80%;
 }
 .text h2 {
@@ -89,7 +98,7 @@ body {
 .text h1 {
   margin-bottom: 36px; 
 }
- .Landing-Page-search input {
+.Landing-Page-search input {
   padding: 15px;
   padding-left: 30px;
   width: 300px;
@@ -111,20 +120,19 @@ body {
   color: white;
   cursor: pointer;
 }
-.card:hover {
-   transform: translateY(-5px);
+.Landing-Page-search button:hover{
+  background-color: red;
 }
- .Landing-Page-search button:hover{
-   background-color: red;
- }
- .productsHeader{
+.productsHeader{
   padding: 25px 50px ;
   text-align: center;
   font-size: 32px;
   font-weight: bold;
   margin: 30px 0;
- }
- .card {
+}
+
+/* 🌟 التصميم الموحد والأساسي لكروت المنتجات 🌟 */
+.card {
   width: 100%;
   max-width: 220px;
   background: white;
@@ -134,7 +142,113 @@ body {
   text-align: center;
   transition: 0.4s;
   margin: auto;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 0.4s;
+  border-radius: 15px 15px 0 0;
+}
+.card h3 {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* 🛠️ خاص بطلبك: تصغير حجم الكروت المخصصة لنتائج البحث في الهوم تماماً لتبدو ملمومة */
+#searchResults .card {
+  max-width: 170px !important;
+  padding-bottom: 10px;
+}
+#searchResults .card img {
+  height: 120px !important;
+}
+#searchResults .card h3 {
+  font-size: 13px !important;
+  margin: 6px;
+}
+#searchResults .price {
+  font-size: 0.9rem;
+}
+#searchResults .quantity-control button {
+  padding: 2px 7px;
+  font-size: 0.8rem;
+}
+#searchResults .add-to-cart-btn {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
+/* 🛠️ كلاس الكارت النشط (Active) الموحد للسلايدر يميناً ويساراً */
+.card.active {
+  transform: scale(1.06) !important;
+  border: 3px solid red !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4) !important;
+  z-index: 5;
+}
+.card.active img {
+  border-bottom: 4px solid red;
+}
+
+/* 💲 تنسيقات عناصر السلة والكميات داخل الكروت */
+.price {
+  color: #f73636;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  gap: 12px;
+}
+.quantity-control button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.quantity-control button:hover {
+  background-color: red;
+}
+.quantity-control span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: black;
+}
+.add-to-cart-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 85%;
+  margin: 5px auto 0 auto;
+  transition: 0.3s;
+}
+.add-to-cart-btn:hover {
+  background-color: red;
+}
+
+/* الحاويات وتوزيع العناصر */
 .search-results {
   width: 90%;
   max-width: 900px;
@@ -144,36 +258,51 @@ body {
   gap: 20px;
   flex-wrap: wrap;
 }
-
-.search-card {
-  width: 220px;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  text-align: center;
-  padding-bottom: 15px;
-  transition: 0.4s;
-}
-
-.search-card img {
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.search-card:hover {
-  transform: scale(1.05);
+/* ❮ ❯ تنسيق أزرار السلايدر لتكون ثابتة وواضحة جداً في المنتصف */
+.slider-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  margin: 30px auto;
 }
-.item{
-    text-align: center;
-    padding: 15px;
-    border-radius: 12px;
-    transition: 0.3s;
-    background: white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-   }
-  .item img {
+.slider-buttons button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.slider-buttons button:hover {
+  background: red;
+}
+
+/* التنسيقات الإضافية والصفحات الأخرى */
+.item {
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  transition: 0.3s;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.item img {
   width: 250px;
   border-radius: 15px;
   transition: 0.4s;
@@ -183,11 +312,14 @@ body {
   font-weight: bold;
   font-size: 20px;
   line-height: 1.6;
-  
 }
 .item img:hover {
   transform: scale(1.08);
   border: 3px solid #007bff;
+}
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 .zoom {
   transform: scale(1.3);
@@ -199,7 +331,7 @@ body {
   margin: 20px;
 }
 .footer {
-   text-align: center;
+  text-align: center;
   color: black;
   width: 100%;
 }
@@ -212,10 +344,6 @@ body {
 .footer a {
   color:black;
   text-decoration: none;
-}
-.item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 .products-title {
   text-align: center;
@@ -249,12 +377,9 @@ body {
   display: flex;
   gap: 30px;
   align-items: center;
-
   flex-wrap: wrap;
   justify-content: center;
 }
-
-/* العنوان خارج البوكس */
 .hero-title{
   text-align: center;
   margin-top: 100px;
@@ -262,8 +387,6 @@ body {
   font-size: 30px;
   color: #f73636;
 }
-
-/* البوكس الرئيسي */
 .hero-box{
   display: flex;
   align-items: center;
@@ -276,39 +399,29 @@ body {
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
-
-/* النص */
 .hero-text{
   flex: 1;
   font-size: 16px;
   line-height: 1.6;
 }
-
-/* الصورة */
 .hero-image img{
-  width: 350px;   /* 👈 صغر الصورة */
+  width: 350px;
   max-width: 100%;
   border-radius: 15px;
 }
 .contact-container {
   display: flex;
   flex-direction: column;
-
   gap: 20px;
 }
 .contact-wrapper {
   display: flex;
-
   justify-content: center;
   align-items: flex-start;
-
   gap: 60px;
-
   max-width: 1200px;
-
   margin: 40px auto;
   padding: 20px;
-
   flex-wrap: wrap;
 }
 .contact-card {
@@ -333,20 +446,16 @@ body {
 .connect-page {
   display: flex;
   flex-direction: column;
-min-width: 320px;
+  min-width: 320px;
   gap: 15px;
 }
 .connect-page textarea {
   width: 100%;
   max-width: 350px;
-
   height: 130px;
-
   padding: 15px;
-
   border-radius: 20px;
   border: 1px solid #ccc;
-
   box-sizing: border-box;
 }
 .connect-page button {
@@ -366,232 +475,34 @@ min-width: 320px;
 .connect-page input {
   width: 100%;
   max-width: 350px;
-
   padding: 15px;
   border-radius: 50px;
   border: 1px solid #ccc;
-
   display: block;
   box-sizing: border-box;
-}
-.connect-page {
-  display: flex;
-  flex-direction: column;
-
-  gap: 15px;
-
-  min-width: 320px;
 }
 #Contact h1{
   text-align: center;
   margin-bottom: 40px;
   font-size: 40px;
 }
-.card h3 {
-  font-size: 16px;
-  margin: 10px 0;
-  color: #333;
-}
-.slider {
-  width: 80%;
-  max-width: 700px;
-  margin: 30px auto;
-}
-.slider img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 20px;
-}
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: 0.4s;
-  border-radius: 15px;
-}
-.active {
-  transform: scale(1.1);
-  border: 3px solid red;
-  box-shadow: 0 0 20px rgba(255,0,0,0.4);
-}
-.active img {
-  transform: scale(1.1);
-  transition: 0.4s;
-  border-bottom: 5px solid red;
-}
-
-.slider-buttons button {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: none;
-  background: black;
-  color: white;
-  font-size: 28px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.slider-buttons button:hover {
-  background: red;
-}
-.card {
-  transition: 0.4s;
-}
-.slider-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  width: 100%;
-  margin: 30px auto;
-}
-
-.slider-buttons button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-
-  background: black;
-  color: white;
-
-  font-size: 30px;
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-.product-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-
-  width: 100%;
-  max-width: 1200px;
-
-  margin: 30px auto;
-  padding: 20px;
-}
-@media (max-width: 768px) {
-
-  /* ===== HEADER ===== */
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .header-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  /* ===== LANDING ===== */
-  .Landing-Page {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
-  }
-
-  /* ===== SEARCH ===== */
-  .Landing-Page-search {
-    flex-direction: column;
-    width: auto;
-    align-items: center;
-  }
-
-  .Landing-Page-search input {
-    width: 50%;
-    margin-left: 0;
-  }
-
-  .Landing-Page-search button {
-    width: 60%;
-  }
-
-  /* ===== PRODUCTS GRID ===== */
-  .Products-Cards {
-    grid-template-columns: 1fr !important;
-    
-  }
-
-  .card {
-    width: 100% !important;
-    max-width: 320px;
-    margin: auto;
-  }
-
-  /* ===== HERO SECTION ===== */
-  .hero-box {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-image img {
-    width: 220px;
-  }
-
-  /* ===== CONTACT ===== */
-  .contact-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .connect-page input,
-  .connect-page textarea {
-    width: 90%;
-  }
-
-  /* ===== SLIDER ===== */
-  .slider-buttons button {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
- }
-
-.products-title {
-    font-size: 35px;
-  }
-  .product-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 80%;
-    gap: 50px;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  .card {
-    width: 100%;
-    max-width: unset;
-    min-width: 0;
-  }
-  .card img {
-    height: 115px;
-   }
-   }
- .menu-icon {
+.menu-icon {
   display: none;
   font-size: 35px;
   cursor: pointer;
 }
 
+/* 📱 الميديا كويري لتوافق الموبايل */
 @media (max-width: 768px) {
-
   .menu-icon {
     display: block;
   }
-
   .header {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-
   .header-links {
     display: none;
     flex-direction: column;
@@ -600,13 +511,67 @@ min-width: 320px;
     background: white;
     margin-top: 10px;
   }
-
   .header-links.active {
     display: flex;
   }
-
   .logo {
     width: 120px;
   }
-
+  .Landing-Page {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+  .Landing-Page-search {
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+  }
+  .Landing-Page-search input {
+    width: 80%;
+    margin-left: 0;
+  }
+  .Landing-Page-search button {
+    width: 60%;
+  }
+  .hero-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-image img {
+    width: 220px;
+  }
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .connect-page input,
+  .connect-page textarea {
+    width: 90%;
+  }
+  .slider-buttons button {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+  .products-title {
+    font-size: 35px;
+  }
+  .product-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 95%;
+    padding: 5px;
+  }
+  .card img {
+    height: 120px;
+  }
+  .quantity-control span, .price {
+    font-size: 0.9rem;
+  }
+  .add-to-cart-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
 }
