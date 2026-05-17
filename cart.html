@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Hik</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2=family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
     <style>
         body { 
-            
-            
             font-family: "Oswald", sans-serif; 
             padding: 40px; 
             background-color: #f5f5f5; 
@@ -57,10 +55,14 @@
             margin: 0;
             color: #666;
         }
+        .item-actions {
+            text-align: right;
+        }
         .item-price {
             font-weight: bold;
             color: red;
             font-size: 1.2rem;
+            white-space: nowrap;
         }
         .total-price { 
             text-align: right; 
@@ -111,6 +113,7 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 1rem;
+            margin-top: 5px;
         }
         .empty-message {
             text-align: center;
@@ -118,7 +121,38 @@
             color: #666;
             margin: 40px 0;
         }
-        
+
+        /* 📱 تحسينات الشاشات الصغيرة لحل مشكلة تداخل الأسعار والقائمة */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .cart-container {
+                padding: 15px;
+                margin-top: 20px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+            .item-details {
+                margin-left: 0;
+            }
+            .item-actions {
+                text-align: center;
+            }
+            .cart-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .back-btn, .clear-btn {
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 <body>
@@ -130,7 +164,6 @@
       </div>
       <img class="logo" src="images/Hikvision-Logo.wine.png" alt="Logo">
     </div>
-    
     <div class="header-links">
       <a href="index.html">Home</a>
       <a href="products.html">Product</a>
@@ -140,26 +173,26 @@
       </a>
     </div>
   </div>
+
 <div class="cart-container">
     <h1>Shopping Cart 🛒</h1>
     
-    <div id="cart-items-list">
-        </div>
+    <div id="cart-items-list"></div>
 
     <div class="total-price">
         Total Price: <span id="cart-total-price">0</span> EGP
     </div>
 
     <div class="cart-buttons">
-        <a href="index.html" class="back-btn">⬅ Continue Shopping</a>
+        <a href="products.html" class="back-btn">⬅ Continue Shopping</a>
         <button class="clear-btn" onclick="clearCart()">Clear Cart 🗑️</button>
     </div>
 </div>
 
 <script>
-    // كود الجافا سكريبت الخاص بقراءة المنتجات وعرضها داخل صفحة الكارت
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+    // دالة بناء وعرض صفحة الكارت بالكامل
     function renderCartPage() {
         const listContainer = document.getElementById("cart-items-list");
         const totalContainer = document.getElementById("cart-total-price");
@@ -167,16 +200,15 @@
         if (!listContainer || !totalContainer) return;
         listContainer.innerHTML = "";
         
-        // إذا كانت السلة فارغة
         if (cart.length === 0) {
             listContainer.innerHTML = "<p class='empty-message'>Your cart is currently empty.</p>";
             totalContainer.innerText = "0";
+            updateCartCountHeader(); // تحديث العداد ليكون 0
             return;
         }
 
         let totalPrice = 0;
 
-        // تكرار عرض المنتجات المضافة
         cart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
@@ -188,7 +220,7 @@
                         <h3>${item.name}</h3>
                         <p>Price: ${item.price} EGP | Quantity: ${item.quantity}</p>
                     </div>
-                    <div>
+                    <div class="item-actions">
                         <div class="item-price">${itemTotal} EGP</div>
                         <button class="delete-btn" onclick="removeFromCart(${index})">Remove ❌</button>
                     </div>
@@ -197,16 +229,25 @@
         });
 
         totalContainer.innerText = totalPrice;
+        updateCartCountHeader(); // تحديث العداد في الهيدر
     }
 
-    // دالة حذف منتج واحد من السلة
+    // دالة لتحديث عداد الهيدر الداخلي لمنع اختفائه في صفحة السلة
+    function updateCartCountHeader() {
+        const cartCountElement = document.getElementById("cart-count");
+        if (!cartCountElement) return;
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountElement.innerText = totalItems;
+    }
+
+    // دالة حذف منتج واحد
     function removeFromCart(index) {
-        cart.splice(index, 1); // حذف العنصر من المصفوفة
-        localStorage.setItem("cart", JSON.stringify(cart)); // حفظ التعديل
-        renderCartPage(); // إعادة عرض الصفحة لتحديث البيانات
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCartPage();
     }
 
-    // دالة تفريغ السلة بالكامل
+    // دالة تفريغ السلة
     function clearCart() {
         if (confirm("Are you sure you want to clear your cart?")) {
             cart = [];
@@ -215,8 +256,16 @@
         }
     }
 
-    // تشغيل الدالة فور تحميل الصفحة
-    window.onload = renderCartPage;
+    // 🌟 السر هنا: دالة فتح وإغلاق القائمة للموبايل تم إضافتها للتأكيد لتفادي تضارب ملف الـ JS الخارجي
+    function toggleMenu() {
+        const menu = document.querySelector(".header-links");
+        if (menu) menu.classList.toggle("active");
+    }
+
+    // تشغيل الدالات فور تحميل الصفحة مباشرة وبشكل مرتب
+    window.onload = function() {
+        renderCartPage();
+    };
 </script>
 
   <footer class="footer">
@@ -224,12 +273,15 @@
       <h3>Hikvision</h3>
       <p>Security Systems</p>
     </div>
+    
+    <script src="script.js"></script>
+
     <div class="footer-links">
       <a href="index.html">About</a>
       <a href="products.html">Product</a>
       <a href="contact.html">Contact</a>
       <a href="cart.html" class="cart-nav-link">
-        🛒 Cart (<span id="cart-count">0</span>)
+        🛒 Cart (<span>0</span>)
       </a>
     </div>
     <p class="copy">© 2026 All Rights Reserved</p>
